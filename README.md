@@ -190,6 +190,7 @@ Correlación cruzada = [ 0 -0.7071 -1.5 -1.4142 0 2.1213 3.5 2.8284 0 -2.8284 -3
 
 
 #**Diagramas de flujo**
-** Parte A **
+
+**Parte A**
 <img width="1436" height="2093" alt="_Diagrama de flujo" src="https://github.com/user-attachments/assets/62389d6d-7d36-4f7b-a2a1-f6e4732c6a68" />
 
