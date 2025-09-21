@@ -204,7 +204,7 @@ uploaded = files.upload()                                         # Subir el arc
 voltaje = np.loadtxt("EOG_señal1.txt")                            # Cargar los datos de voltaje de la señal
 fs = 800                                                          # Definir la frecuencia de muestreo 
 N = len(voltaje)
-t = np.arange(N) / fs  # eje de tiempo
+t = np.arange(N) / fs                                             # eje de tiempo
 
 # Graficar
 plt.figure(figsize=(10,4))
@@ -220,6 +220,22 @@ plt.show()
 ## **Gráfica de la señal EOG**
 
 <img width="1051" height="488" alt="image" src="https://github.com/user-attachments/assets/dd20318a-ab2c-4c5c-a7d1-a918d0fc1549" />
+
+## **Caracterización de la señal**
+## **Código en Python (Google colab)**
+
+<pre> ```
+
+
+
+
+
+
+  
+  ```
+</pre>
+
+## **Análisis de los resultados de la parte C**
 
 # **Diagramas de flujo**
 
