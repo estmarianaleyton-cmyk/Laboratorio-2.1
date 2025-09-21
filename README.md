@@ -185,6 +185,10 @@ Descripción:
 La correlación cruzada es cercana a cero para casi todos los desplazamientos,
 lo que indica que x1[n] y x2[n] son casi ortogonales (desfasadas 90°).
 Los valores positivos y negativos muestran la relación senoidal entre ambas.
+
+**¿En qué situaciones resulta útil aplicar la correlación cruzada en
+el procesamiento digital de señales?**
+La correlación cruzada es una herramienta fundamental en el procesamiento digital de señales, ya que permite identificar similitudes entre señales aun cuando estén desplazadas en el tiempo. Su aplicación es útil en la detección de señales en ambientes con ruido, en la estimación de retardos temporales (como en radares, sonar y sistemas de localización GPS) y en el reconocimiento de patrones (voz, imágenes o huellas digitales).
 # **Parte C**
 ## **Código en Python (Google colab)**
 from google.colab import files
