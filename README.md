@@ -173,13 +173,21 @@ print("Correlación cruzada:", np.round(correlacion, 4))
 
 <img width="1235" height="408" alt="image" src="https://github.com/user-attachments/assets/2a4b0e97-f8d1-4dbf-ab2f-ac6fa6a567bb" />
 
-Resultados:
+*Resultados:*
 
 x1[n] = [ 1 0.7071 0 -0.7071 -1 -0.7071 0 0.7071 1 ]
 
 x2[n] = [ 0 0.7071 1 0.7071 0 -0.7071 -1 -0.7071 0 ]
 
 Correlación cruzada = [ 0 -0.7071 -1.5 -1.4142 0 2.1213 3.5 2.8284 0 -2.8284 -3.5 -2.1213 0 1.4142 1.5 0.7071 0 ]
+
+*Descripción de la secuencia resultante:*
+
+La secuencia de la correlación cruzada muestra una simetría casi perfecta alrededor de k=0, alternando entre valores positivos y negativos. En k=0, se observa un valor cercano a cero, lo que sugiere que no hay una correlación directa entre las señales sin desfase. Esto se debe a que x1 es un coseno y x2 es un seno de la misma frecuencia, lo que significa que están desfasados 90 grados y son prácticamente ortogonales en un ciclo completo, haciendo que su producto promedio tienda a cancelarse. Los picos más altos se presentan en retardos positivos y negativos cercanos a un cuarto de periodo, donde las señales coinciden más, lo que refuerza la idea de que la similitud entre ambas depende del desfase.
+
+*¿En qué situaciones resulta útil aplicar la correlación cruzada en el procesamiento digital de señales?*
+
+La correlación cruzada es una herramienta fundamental en el procesamiento digital de señales, ya que permite identificar similitudes entre señales aun cuando estén desplazadas en el tiempo. Su aplicación es útil en la detección de señales en ambientes con ruido, en la estimación de retardos temporales (como en radares y sistemas de localización GPS) y en el reconocimiento de patrones (voz, imágenes o huellas digitales).
 
 ## **Análisis de los resultados de la parte B**
 
