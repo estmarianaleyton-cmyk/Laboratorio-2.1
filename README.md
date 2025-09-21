@@ -41,55 +41,82 @@ y = np.convolve(x, h)
 
 # Graficar
 plt.stem(y, basefmt=" ")
+
 plt.title("Convolución y[n] = x[n] * h[n]")
+
 plt.xlabel("n")
+
 plt.ylabel("Amplitud")
+
 plt.show()
 
 print("y[n] =", y)
+
 <img width="571" height="455" alt="download" src="https://github.com/user-attachments/assets/2293d9e2-409d-4edf-a32b-34dea67da8e8" />
 **Dubrasca Martinez**
 h = ([5, 6, 0, 0, 7, 6, 0])
+
 x = ([5, 0, 5, 2, 2, 2, 7])
+
 y = np.convolve(x, h)
 
 # Graficar
 plt.stem(y, basefmt=" ")
+
 plt.title("Convolución y[n] = x[n] * h[n]")
+
 plt.xlabel("n")
+
 plt.ylabel("Amplitud")
+
 plt.show()
 
 print("y[n] =", y)
+
 <img width="562" height="455" alt="download" src="https://github.com/user-attachments/assets/51f36e2f-3a3b-431b-a470-5a12329f370e" />
 
 **Mariana Leyton**
 h = np.array([5,6,0,0,7,5,2])
+
 x = np.array([1,0,3,1,8,0,5,3,7,1])
+
 y = np.convolve(x, h)
+
 
 # Graficar
 plt.stem(y, basefmt=" ")
+
 plt.title("Convolución y[n] = x[n] * h[n]")
+
 plt.xlabel("n")
+
 plt.ylabel("Amplitud")
+
 plt.show()
 
 print("y[n] =", y)
+
 <img width="571" height="455" alt="download" src="https://github.com/user-attachments/assets/4aae3e43-0524-49e0-973e-454d6eaf1ec5" />
 # **Parte B**
 ## **Código en Python (Google colab)**
+
 import numpy as np
+
 import matplotlib.pyplot as plt
 
 # Parametros
 Ts = 0.00125                                           # Tiempo de muestreo en s
+
 f = 100                                                # Frecuencia en Hz
+
 muestras = np.arange(0,9)                              # Rango de n de 0 a 8
+
 t = muestras * Ts                                      # Vector de tiempo
 
 # Señales
+
 x1 = np.cos(2*np.pi*f*t)
+
 x2 = np.sin(2*np.pi*f*t)
 
 # Gráficas
