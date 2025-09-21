@@ -20,289 +20,174 @@ Para el desarrollo de la práctica se plantearon tres fases principales. En la p
 𝑥[𝑛]=cos(2𝜋100𝑛𝑇𝑠) y x2[n]=cos(2π100nTs) y 𝑥2[𝑛]=sin⁡(2𝜋100𝑛𝑇𝑠)x2	[n]=sin(2π100nTs), definidas para un periodo de muestreo 𝑇𝑠=1.25𝑚𝑠 Ts=1.25ms, calculando su correlación cruzada, graficando la secuencia resultante y analizando las situaciones en las que esta herramienta resulta útil en el procesamiento digital de señales. Finalmente, en la tercera fase, se generó una señal biológica utilizando el generador de señales, se determinó la frecuencia de Nyquist y se digitalizó aplicando una frecuencia de muestreo cuatro veces superior. Posteriormente, se caracterizó la señal en el dominio del tiempo calculando parámetros estadísticos (media, mediana, desviación estándar, máximo y mínimo) y clasificándola según su naturaleza (determinística/aleatoria, periódica/aparádica, analógica/digital). Por último, se aplicó la Transformada de Fourier a la señal, obteniendo su representación en el dominio de la frecuencia, la densidad espectral de potencia, así como el análisis de sus parámetros estadísticos (frecuencia media, mediana, desviación estándar e histograma de frecuencias).
 
 # **Parte A**
-
+## **Código en Python (Google colab)**
+<pre> ```
+# Importación de las librerias a utilizar
+!pip install wfdb                                                    # Instalación de la liberia wfdb
+import wfdb                                                          # Liberia para analizar señales fisiologicas
+import matplotlib.pyplot as plt                                      # Liberia para permitir visualizar las graficas de las señales
+import os                                                            # Liberia para interactuar con el sistema operativo
+from google.colab import files                                       # Liberia en Google colab para subir archivos desde el computador
 import numpy as np
 
-!pip install wfdb
+  ```
+</pre>
+## **Convolución Maria Fernanda Castellanos**
 
-import wfdb
+<pre> ```
+h = np.array([5,6,0,0,8,6,6])                                        # Sistema (código)
+x = np.array([1,0,5,3,3,2,5,6,7,3])                                  # Señal (cédula)
+y = np.convolve(x, h)                                                # Se realiza la convolucion y se obtiene "y" como señal de salida 
 
-import matplotlib.pyplot as plt
+# Graficar
+plt.stem(y, basefmt=" ")                                             # Función para graficar la señal de salida (plt.stem para señales discretas)
+plt.title("Convolución y[n] = x[n] * h[n]")
+plt.xlabel("n")
+plt.ylabel("Amplitud")
+plt.show()                                                           # Mostrar el gráfico en pantalla
 
-from google.colab import files
+print("y[n] =", y)                                                   # Imprimir los resultados de la convolucion de la señal de salida
+  ```
+</pre>
 
-**Maria Fernanda Castellanos Piza**
+## **Gráfica de convolución**
+<img width="712" height="565" alt="image" src="https://github.com/user-attachments/assets/1b88052e-5a85-44aa-ab9c-e8afe59830b5" />
 
-h = np.array([5,6,0,0,8,6,6])
+y[n] = [ 5 6 25 45 41 34 83 114 143 109 88 90 122 102 60 18 ]
 
-x = np.array([1,0,5,3,3,2,5,6,7,3])
+## **Convolución Dubrasca Martínez**
 
+<pre> ```
+h = ([5, 6, 0, 0, 7, 6, 0])                                         
+x = ([5, 0, 5, 2, 2, 2, 7])                                         
 y = np.convolve(x, h)
 
 # Graficar
 plt.stem(y, basefmt=" ")
-
 plt.title("Convolución y[n] = x[n] * h[n]")
-
 plt.xlabel("n")
-
 plt.ylabel("Amplitud")
-
 plt.show()
 
 print("y[n] =", y)
+  ```
+</pre>
 
-<img width="571" height="455" alt="download" src="https://github.com/user-attachments/assets/2293d9e2-409d-4edf-a32b-34dea67da8e8" />
-**Dubrasca Martinez**
-h = ([5, 6, 0, 0, 7, 6, 0])
+## **Gráfica de convolución**
+<img width="702" height="566" alt="image" src="https://github.com/user-attachments/assets/67aab448-fbe3-44a2-be97-d1b4dd17cc66" />
 
-x = ([5, 0, 5, 2, 2, 2, 7])
+y[n] = [ 25 30 25 40 57 52 82 86 26 26 61 42 0 ]
 
-y = np.convolve(x, h)
+## **Convolución Mariana Leyton Palencia**
 
-# Graficar
-plt.stem(y, basefmt=" ")
-
-plt.title("Convolución y[n] = x[n] * h[n]")
-
-plt.xlabel("n")
-
-plt.ylabel("Amplitud")
-
-plt.show()
-
-print("y[n] =", y)
-
-<img width="562" height="455" alt="download" src="https://github.com/user-attachments/assets/51f36e2f-3a3b-431b-a470-5a12329f370e" />
-
-**Mariana Leyton**
+<pre> ```
 h = np.array([5,6,0,0,7,5,2])
-
 x = np.array([1,0,3,1,8,0,5,3,7,1])
-
 y = np.convolve(x, h)
-
 
 # Graficar
 plt.stem(y, basefmt=" ")
-
 plt.title("Convolución y[n] = x[n] * h[n]")
-
 plt.xlabel("n")
-
 plt.ylabel("Amplitud")
-
 plt.show()
 
 print("y[n] =", y)
+  ```
+</pre>
 
-<img width="571" height="455" alt="download" src="https://github.com/user-attachments/assets/4aae3e43-0524-49e0-973e-454d6eaf1ec5" />
+## **Gráfica de convolución**
+<img width="710" height="569" alt="image" src="https://github.com/user-attachments/assets/76e19389-52e2-42e2-a121-d7740bf7803b" />
+
+y[n] = [ 5 6 15 23 53 53 48 67 120 89 57 46 74 48 19 2 ]
+
+## **Análisis de los resultados de la parte A**
+
+
+
 # **Parte B**
 ## **Código en Python (Google colab)**
 
-import numpy as np
-
-import matplotlib.pyplot as plt
-
-# Parametros
-Ts = 0.00125                                           # Tiempo de muestreo en s
-
-f = 100                                                # Frecuencia en Hz
-
-muestras = np.arange(0,9)                              # Rango de n de 0 a 8
-
-t = muestras * Ts                                      # Vector de tiempo
+<pre> ```
+#Parametros
+Ts = 0.00125                                                         # Periodo de muestreo en s
+fs = 1/Ts                                                            # Frecuencia de muestreo                                             
+f = 100                                                              # Frecuencia de la señal
+muestras = np.arange(0,9)                                            # Rango de n de 0 a 9
+t = muestras * Ts                                                    # Vector de tiempo
 
 # Señales
-
-x1 = np.cos(2*np.pi*f*t)
-
+x1 = np.cos(2*np.pi*f*t)                                             
 x2 = np.sin(2*np.pi*f*t)
 
-# Gráficas
 # Señal x1[n]
-plt.figure(figsize=(10,6))
-
-plt.subplot(2, 1, 2)
-
+plt.figure(figsize=(10,6))                                           
+plt.subplot(2, 1, 1)                                                 # Divide la figura en dos filas y una columna y se selecciona la gráfica de la fila uno
 plt.stem(muestras, x1, 'b', basefmt=' ')
-
 plt.title('Señal x1[n] = cos(2π×100×nTs)')
-
 plt.xlabel('muestras (n)')
-
 plt.ylabel('Amplitud')
-
 plt.grid(True, alpha=0.3)
-
-plt.axhline(0, color='black', linewidth=0.5)
+plt.axhline(0, color='black', linewidth=0.5)                         # Linea horizontal en y = 0 para referencia
 
 # Señal x2[n]
-
 plt.figure(figsize=(10,6))
-
-plt.subplot(2, 1, 2)
-
+plt.subplot(2, 1, 1)
 plt.stem(muestras, x2, 'r', basefmt=' ')
-
 plt.title('Señal x2[n] = sin(2π×100×nTs)')
-
 plt.xlabel('muestras (n)')
-
 plt.ylabel('Amplitud')
-
 plt.grid(True, alpha=0.3)
-
 plt.axhline(0, color='black', linewidth=0.5)
 
-
-# Correlación cruzada
-
-correlacion = np.correlate(x1, x2, mode='full')
-
-lags = np.arange(-len(x1)+1, len(x1))               # Ejes de desplazamiento (k)
-
+# Correlacion
+correlacion = np.correlate(x1, x2, mode= 'full')                     # Calcula la correlación cruzada entre x1 y x2
+lags = np.arange(-len(x1)+1, len(x1))                                # Vector de desplazamiento k para cada punto de la correlación
 plt.figure(figsize=(10,6))
-
-plt.subplot(2, 1, 2)
-
-plt.stem(lags, correlacion, 'g', basefmt=' ')
-
-plt.title('Correlación Cruzada Rₓ₁ₓ₂[k]')
-
+plt.subplot(2, 1, 1)
+plt.stem(lags, correlacion, 'g', basefmt=' ')                        # Función para graficar la señal de salida (plt.stem para señales discretas)
+plt.title('Correlación Cruzada')
 plt.xlabel('k (desplazamiento)')
-
 plt.ylabel('Correlación')
-
 plt.grid(True, alpha=0.3)
-
 plt.axhline(0, color='black', linewidth=0.5)
-
 plt.tight_layout()
-
 plt.show()
 
-# Mostrar valores numéricos
+# Imprimir resultados numéricos
+print("x1[n]:", np.round(x1, 4))
+print("x2[n]:", np.round(x2, 4))
+print("Correlación cruzada:", np.round(correlacion, 4))
+  ```
+</pre>
 
-print("\n=== x1[n] ===")
+## **Gráfica de la señal x1**
 
-for i, val in enumerate(x1):
+<img width="1072" height="367" alt="image" src="https://github.com/user-attachments/assets/93e573f1-0066-4ad3-852b-fe8aebd67f13" />
 
-    print(f"x1[{i}] = {val:.4f}")
+## **Gráfica de la señal x2**
+
+<img width="1071" height="363" alt="image" src="https://github.com/user-attachments/assets/84d1782d-f8e3-4c96-b5eb-ae7f744609a1" />
+
+## **Gráfica de la correlación cruzada**
+
+<img width="1235" height="408" alt="image" src="https://github.com/user-attachments/assets/2a4b0e97-f8d1-4dbf-ab2f-ac6fa6a567bb" />
+
+Resultados:
+
+x1[n] = [ 1 0.7071 0 -0.7071 -1 -0.7071 0 0.7071 1 ]
+
+x2[n] = [ 0 0.7071 1 0.7071 0 -0.7071 -1 -0.7071 0 ]
+
+Correlación cruzada = [ 0 -0.7071 -1.5 -1.4142 0 2.1213 3.5 2.8284 0 -2.8284 -3.5 -2.1213 0 1.4142 1.5 0.7071 0 ]
+
+## **Análisis de los resultados de la parte B**
 
 
-print("\n=== x2[n] ===")
-
-for i, val in enumerate(x2):
-
-    print(f"x2[{i}] = {val:.4f}")
-
-print("\n=== Correlación cruzada R_x1x2[k] ===")
-
-for k, val in zip(lags, correlacion):
-
-    print(f"k = {k:>2d} -> R[k] = {val:.4f}")
-
-# Descripción de la secuencia
-
-print("Descripción:")
-
-print("La correlación cruzada es cercana a cero para casi todos los desplazamientos,")
-
-print("lo que indica que x1[n] y x2[n] son casi ortogonales (desfasadas 90°).")
-
-print("Los valores positivos y negativos muestran la relación senoidal entre ambas.")
-<img width="857" height="295" alt="download" src="https://github.com/user-attachments/assets/39c27c3f-c1f3-4be0-b6e5-b4289bfcd3bb" />
-<img width="857" height="295" alt="download" src="https://github.com/user-attachments/assets/eb2b1656-4e03-46ce-93dc-c4b4351a05df" />
-<img width="990" height="330" alt="download" src="https://github.com/user-attachments/assets/05c0cc92-1c09-4230-b91e-15e2d176616e" />
-=== x1[n] ===
-x1[0] = 1.0000
-x1[1] = 0.7071
-x1[2] = 0.0000
-x1[3] = -0.7071
-x1[4] = -1.0000
-x1[5] = -0.7071
-x1[6] = -0.0000
-x1[7] = 0.7071
-x1[8] = 1.0000
-
-=== x2[n] ===
-x2[0] = 0.0000
-x2[1] = 0.7071
-x2[2] = 1.0000
-x2[3] = 0.7071
-x2[4] = 0.0000
-x2[5] = -0.7071
-x2[6] = -1.0000
-x2[7] = -0.7071
-x2[8] = -0.0000
-
-=== Correlación cruzada R_x1x2[k] ===
-k = -8 -> R[k] = -0.0000
-k = -7 -> R[k] = -0.7071
-k = -6 -> R[k] = -1.5000
-k = -5 -> R[k] = -1.4142
-k = -4 -> R[k] = -0.0000
-k = -3 -> R[k] = 2.1213
-k = -2 -> R[k] = 3.5000
-k = -1 -> R[k] = 2.8284
-k =  0 -> R[k] = -0.0000
-k =  1 -> R[k] = -2.8284
-k =  2 -> R[k] = -3.5000
-k =  3 -> R[k] = -2.1213
-k =  4 -> R[k] = 0.0000
-k =  5 -> R[k] = 1.4142
-k =  6 -> R[k] = 1.5000
-k =  7 -> R[k] = 0.7071
-k =  8 -> R[k] = 0.0000
-Descripción:
-La correlación cruzada es cercana a cero para casi todos los desplazamientos,
-lo que indica que x1[n] y x2[n] son casi ortogonales (desfasadas 90°).
-Los valores positivos y negativos muestran la relación senoidal entre ambas.
-
-**¿En qué situaciones resulta útil aplicar la correlación cruzada en
-el procesamiento digital de señales?**
-La correlación cruzada es una herramienta fundamental en el procesamiento digital de señales, ya que permite identificar similitudes entre señales aun cuando estén desplazadas en el tiempo. Su aplicación es útil en la detección de señales en ambientes con ruido, en la estimación de retardos temporales (como en radares, sonar y sistemas de localización GPS) y en el reconocimiento de patrones (voz, imágenes o huellas digitales).
 # **Parte C**
 ## **Código en Python (Google colab)**
 
-from google.colab import files
 
-import numpy as np
-
-import matplotlib.pyplot as plt
-
-uploaded = files.upload()
-# Cargar los datos
-
-voltaje = np.loadtxt("EOG_señal1.txt")
-
-# Definir parámetros de muestreo
-
-fs = 800  # Hz (ajústalo al valor que usaste)
-
-N = len(voltaje)
-
-t = np.arange(N) / fs  # eje de tiempo
-
-# Graficar
-
-plt.figure(figsize=(10,4))
-
-plt.plot(t, voltaje, label="Señal EOG")
-
-plt.xlabel("Tiempo [s]")
-
-plt.ylabel("Voltaje [V]")
-
-plt.title("Señal EOG")
-
-plt.legend()
-
-plt.grid(True)
-
-plt.show()
-<img width="844" height="393" alt="download" src="https://github.com/user-attachments/assets/53fcbbaa-b4c5-4994-bb45-faea5796cb29" />
 
 #**Diagramas de flujo**
 ** Parte A **
