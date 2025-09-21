@@ -303,3 +303,8 @@ plt.grid(True)
 
 plt.show()
 <img width="844" height="393" alt="download" src="https://github.com/user-attachments/assets/53fcbbaa-b4c5-4994-bb45-faea5796cb29" />
+
+#**Diagramas de flujo**
+** Parte A **
+<img width="1436" height="2093" alt="_Diagrama de flujo" src="https://github.com/user-attachments/assets/62389d6d-7d36-4f7b-a2a1-f6e4732c6a68" />
+
