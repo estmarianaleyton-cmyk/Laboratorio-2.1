@@ -195,7 +195,31 @@ La correlación cruzada es una herramienta fundamental en el procesamiento digit
 # **Parte C**
 ## **Código en Python (Google colab)**
 
+<pre> ```
+from google.colab import files
+import numpy as np
+import matplotlib.pyplot as plt
+uploaded = files.upload()                                         # Subir el archivo .txt de la señal de electrooculografía adquirida del DAQ
 
+voltaje = np.loadtxt("EOG_señal1.txt")                            # Cargar los datos de voltaje de la señal
+fs = 800                                                          # Definir la frecuencia de muestreo 
+N = len(voltaje)
+t = np.arange(N) / fs  # eje de tiempo
+
+# Graficar
+plt.figure(figsize=(10,4))
+plt.plot(t, voltaje, label="Señal EOG")
+plt.xlabel("Tiempo [s]")
+plt.ylabel("Voltaje [V]")
+plt.title("Señal EOG")
+plt.grid(True)
+plt.show()  
+  ```
+</pre>
+
+## **Gráfica de la señal EOG**
+
+<img width="1051" height="488" alt="image" src="https://github.com/user-attachments/assets/dd20318a-ab2c-4c5c-a7d1-a918d0fc1549" />
 
 # **Diagramas de flujo**
 
