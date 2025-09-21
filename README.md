@@ -122,56 +122,95 @@ x2 = np.sin(2*np.pi*f*t)
 # Gráficas
 # Señal x1[n]
 plt.figure(figsize=(10,6))
+
 plt.subplot(2, 1, 2)
+
 plt.stem(muestras, x1, 'b', basefmt=' ')
+
 plt.title('Señal x1[n] = cos(2π×100×nTs)')
+
 plt.xlabel('muestras (n)')
+
 plt.ylabel('Amplitud')
+
 plt.grid(True, alpha=0.3)
+
 plt.axhline(0, color='black', linewidth=0.5)
 
 # Señal x2[n]
+
 plt.figure(figsize=(10,6))
+
 plt.subplot(2, 1, 2)
+
 plt.stem(muestras, x2, 'r', basefmt=' ')
+
 plt.title('Señal x2[n] = sin(2π×100×nTs)')
+
 plt.xlabel('muestras (n)')
+
 plt.ylabel('Amplitud')
+
 plt.grid(True, alpha=0.3)
+
 plt.axhline(0, color='black', linewidth=0.5)
 
 
 # Correlación cruzada
+
 correlacion = np.correlate(x1, x2, mode='full')
+
 lags = np.arange(-len(x1)+1, len(x1))               # Ejes de desplazamiento (k)
+
 plt.figure(figsize=(10,6))
+
 plt.subplot(2, 1, 2)
+
 plt.stem(lags, correlacion, 'g', basefmt=' ')
+
 plt.title('Correlación Cruzada Rₓ₁ₓ₂[k]')
+
 plt.xlabel('k (desplazamiento)')
+
 plt.ylabel('Correlación')
+
 plt.grid(True, alpha=0.3)
+
 plt.axhline(0, color='black', linewidth=0.5)
+
 plt.tight_layout()
+
 plt.show()
 
 # Mostrar valores numéricos
+
 print("\n=== x1[n] ===")
+
 for i, val in enumerate(x1):
+
     print(f"x1[{i}] = {val:.4f}")
 
+
 print("\n=== x2[n] ===")
+
 for i, val in enumerate(x2):
+
     print(f"x2[{i}] = {val:.4f}")
 
 print("\n=== Correlación cruzada R_x1x2[k] ===")
+
 for k, val in zip(lags, correlacion):
+
     print(f"k = {k:>2d} -> R[k] = {val:.4f}")
 
 # Descripción de la secuencia
+
 print("Descripción:")
+
 print("La correlación cruzada es cercana a cero para casi todos los desplazamientos,")
+
 print("lo que indica que x1[n] y x2[n] son casi ortogonales (desfasadas 90°).")
+
 print("Los valores positivos y negativos muestran la relación senoidal entre ambas.")
 <img width="857" height="295" alt="download" src="https://github.com/user-attachments/assets/39c27c3f-c1f3-4be0-b6e5-b4289bfcd3bb" />
 <img width="857" height="295" alt="download" src="https://github.com/user-attachments/assets/eb2b1656-4e03-46ce-93dc-c4b4351a05df" />
@@ -226,25 +265,41 @@ el procesamiento digital de señales?**
 La correlación cruzada es una herramienta fundamental en el procesamiento digital de señales, ya que permite identificar similitudes entre señales aun cuando estén desplazadas en el tiempo. Su aplicación es útil en la detección de señales en ambientes con ruido, en la estimación de retardos temporales (como en radares, sonar y sistemas de localización GPS) y en el reconocimiento de patrones (voz, imágenes o huellas digitales).
 # **Parte C**
 ## **Código en Python (Google colab)**
+
 from google.colab import files
+
 import numpy as np
+
 import matplotlib.pyplot as plt
+
 uploaded = files.upload()
 # Cargar los datos
+
 voltaje = np.loadtxt("EOG_señal1.txt")
 
 # Definir parámetros de muestreo
+
 fs = 800  # Hz (ajústalo al valor que usaste)
+
 N = len(voltaje)
+
 t = np.arange(N) / fs  # eje de tiempo
 
 # Graficar
+
 plt.figure(figsize=(10,4))
+
 plt.plot(t, voltaje, label="Señal EOG")
+
 plt.xlabel("Tiempo [s]")
+
 plt.ylabel("Voltaje [V]")
+
 plt.title("Señal EOG")
+
 plt.legend()
+
 plt.grid(True)
+
 plt.show()
 <img width="844" height="393" alt="download" src="https://github.com/user-attachments/assets/53fcbbaa-b4c5-4994-bb45-faea5796cb29" />
