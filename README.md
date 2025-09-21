@@ -22,14 +22,21 @@ Para el desarrollo de la práctica se plantearon tres fases principales. En la p
 # **Parte A**
 
 import numpy as np
+
 !pip install wfdb
+
 import wfdb
+
 import matplotlib.pyplot as plt
+
 from google.colab import files
 
 **Maria Fernanda Castellanos Piza**
+
 h = np.array([5,6,0,0,8,6,6])
+
 x = np.array([1,0,5,3,3,2,5,6,7,3])
+
 y = np.convolve(x, h)
 
 # Graficar
