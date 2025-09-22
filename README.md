@@ -6,7 +6,7 @@
 
 **Estudiantes:** Dubrasca Martinez, Mariana Leyton, Maria Fernanda Castellanos
 
-**Fecha:** 19 de septiembre de 2025
+**Fecha:** 21 de septiembre de 2025
 
 **Título de la práctica:** Convolucion, transformada y estadisticos descriptivos de la señal EOG.
 
