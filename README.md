@@ -21,6 +21,20 @@ Para el desarrollo de la práctica se plantearon tres fases principales. En la p
 x1[n]=cos(2π100nTs) y x2[n]=sin(2π100nTs), definidas para un periodo de muestreo de Ts=1.25ms, calculando su correlación cruzada, graficando la secuencia resultante y analizando las situaciones en las que esta herramienta resulta útil en el procesamiento digital de señales. Finalmente, en la tercera fase, se generó una señal biológica utilizando el generador de señales, se determinó la frecuencia de Nyquist y se digitalizó aplicando una frecuencia de muestreo cuatro veces superior. Posteriormente, se caracterizó la señal en el dominio del tiempo calculando parámetros estadísticos (media, mediana, desviación estándar, máximo y mínimo) y clasificándola según su naturaleza (determinística/aleatoria, periódica/aparádica, analógica/digital). Por último, se aplicó la Transformada de Fourier a la señal, obteniendo su representación en el dominio de la frecuencia, la densidad espectral de potencia, así como el análisis de sus parámetros estadísticos (frecuencia media, mediana, desviación estándar e histograma de frecuencias).
 
 # **Parte A**
+  ## **Convolución a mano Maria Castellanos**
+<img width="1418" height="887" alt="image" src="https://github.com/user-attachments/assets/141c2903-40df-45e6-b512-a8bc9fd26951" />
+## **Gráfica de convolución**
+
+  ## **Convolución a mano Dubrasca Martínez**
+<img width="1305" height="831" alt="image" src="https://github.com/user-attachments/assets/2a42648d-17c6-4ad4-a63c-d04911c23275" />
+## **Gráfica de convolución**
+
+  ## **Convolución a mano Mariana Leyton**
+<img width="1370" height="950" alt="image" src="https://github.com/user-attachments/assets/efa31e59-37e9-408f-847c-0b21d2f67be8" />
+## **Gráfica de convolución**
+<img width="1128" height="1600" alt="image" src="https://github.com/user-attachments/assets/011be737-f350-41aa-8471-d7c0db20de17" />
+
+
 ## **Código en Python (Google colab)**
 <pre> ```
 # Importación de las librerias a utilizar
