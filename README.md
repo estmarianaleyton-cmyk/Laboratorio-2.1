@@ -23,16 +23,23 @@ x1[n]=cos(2π100nTs) y x2[n]=sin(2π100nTs), definidas para un periodo de muestr
 # **Parte A**
   ## **Convolución a mano Maria Castellanos**
 <img width="1418" height="887" alt="image" src="https://github.com/user-attachments/assets/141c2903-40df-45e6-b512-a8bc9fd26951" />
+
 ## **Gráfica de convolución**
+
 
   ## **Convolución a mano Dubrasca Martínez**
 <img width="1305" height="831" alt="image" src="https://github.com/user-attachments/assets/2a42648d-17c6-4ad4-a63c-d04911c23275" />
+
 ## **Gráfica de convolución**
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/e64c6361-a4f4-4da9-b450-6aac96954547" />
+
+
 
   ## **Convolución a mano Mariana Leyton**
 <img width="1370" height="950" alt="image" src="https://github.com/user-attachments/assets/efa31e59-37e9-408f-847c-0b21d2f67be8" />
+
 ## **Gráfica de convolución**
-<img width="1128" height="1600" alt="image" src="https://github.com/user-attachments/assets/011be737-f350-41aa-8471-d7c0db20de17" />
+ <img width="1128" height="1600" alt="image" src="https://github.com/user-attachments/assets/011be737-f350-41aa-8471-d7c0db20de17" />
 
 
 ## **Código en Python (Google colab)**
