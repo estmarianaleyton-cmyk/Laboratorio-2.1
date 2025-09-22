@@ -25,6 +25,7 @@ x1[n]=cos(2π100nTs) y x2[n]=sin(2π100nTs), definidas para un periodo de muestr
 <img width="1418" height="887" alt="image" src="https://github.com/user-attachments/assets/141c2903-40df-45e6-b512-a8bc9fd26951" />
 
 ## **Gráfica de convolución**
+<img width="1190" height="1600" alt="image" src="https://github.com/user-attachments/assets/7407e121-7240-492e-914a-3706c9652c24" />
 
 
   ## **Convolución a mano Dubrasca Martínez**
