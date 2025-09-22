@@ -213,7 +213,8 @@ La secuencia de la correlación cruzada muestra una simetría casi perfecta alre
 La correlación cruzada es una herramienta fundamental en el procesamiento digital de señales, ya que permite identificar similitudes entre señales aun cuando estén desplazadas en el tiempo. Su aplicación es útil en la detección de señales en ambientes con ruido, en la estimación de retardos temporales (como en radares y sistemas de localización GPS) y en el reconocimiento de patrones (voz, imágenes o huellas digitales).
 
 ## **Análisis de los resultados de la parte B**
-
+En la parte B se definieron las señales 𝑥1[𝑛]=cos(2𝜋100𝑛𝑇𝑠)x1[n]=cos(2π100nTs) y 𝑥2[𝑛]=sin⁡(2𝜋100𝑛𝑇𝑠x2[n]=sin(2π100nTs) con 𝑇𝑠=1.25 ms para 0≤𝑛<9
+0≤n<9, obteniendo vectores de 9 muestras que, al aplicar la correlación cruzada, generaron una secuencia oscilatoria y antisimétrica con máximos de aproximadamente ±3.5 en los desplazamientos k=±2. Este resultado confirma que la senoide es la cosenoide retrasada un cuarto de periodo (2 muestras, equivalentes a 2.5 ms a 100 Hz), lo cual se refleja en el corrimiento donde se alcanza la mayor similitud entre ambas señales. La representación gráfica muestra la secuencia de correlación centrada en k=0, con picos positivos y negativos que evidencian la relación de cuadratura entre el coseno y el seno.
 
 # **Parte C**
 
