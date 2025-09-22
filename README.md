@@ -104,7 +104,7 @@ y[n] = [ 5 6 15 23 53 53 48 67 120 89 57 46 74 48 19 2 ]
 
 ## **Análisis de los resultados de la parte A**
 
-
+Al analizar la señal de salida en los tres casos, se puede observar que su longitud es igual a la suma de la longitud de la señal x y la longitud de la señal h, menos uno. Este resultado es lo que se espera al realizar una convolución discreta. Además, se observa que las primeras muestras de la señal de salida aumentan a medida que se incrementa el solapamiento entre h y x. Luego, se alcanzan valores máximos en los puntos donde la superposición de los elementos más significativos de ambas señales es más pronunciada. Por ejemplo, en la segunda convolución, se obtiene un valor máximo de 86, lo que indica el momento de mayor coincidencia entre los valores más altos de h y x. En términos generales, la convolución en señales discretas describe cómo responde el sistema h ante la entrada x. En este caso, los picos en la señal de salida y representan los momentos en los que la entrada tiene componentes que coinciden de manera más clara con la estructura de h.
 
 # **Parte B**
 ## **Código en Python (Google colab)**
