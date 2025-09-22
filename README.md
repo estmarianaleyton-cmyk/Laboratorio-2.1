@@ -268,6 +268,7 @@ plt.show()
 <img width="2171" height="4800" alt="_Diagrama de flujo (1)" src="https://github.com/user-attachments/assets/7062cc88-b80e-4354-a5c7-dee116b51923" />
 
 ## **Parte c**
+<img width="1760" height="1360" alt="_Diagrama de flujo" src="https://github.com/user-attachments/assets/aa261245-2a6b-4730-af29-f5af757f14de" />
 
 
 
