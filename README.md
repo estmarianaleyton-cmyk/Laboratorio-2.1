@@ -215,16 +215,23 @@ La correlación cruzada es una herramienta fundamental en el procesamiento digit
 
 
 # **Parte C**
+
+## **Frecuencia de Nyquist para la señal**
+
+Según la Revista Cubana de Investigaciones Biomédicas el EOG tiene un ragon de frecuencias que varia entre los 0 y 100 Hz, puesto que la frecuencia de Nyquist propone que debe ser 2 veces la frecuencia máxima, la Frecuencia para esta señal es FN=200Hz.
+
 ## **Código en Python (Google colab)**
 
 <pre> ```
 from google.colab import files
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.signal import periodogram
+from scipy.signal import correlate, convolve, periodogram
 uploaded = files.upload()                                         # Subir el archivo .txt de la señal de electrooculografía adquirida del DAQ
 
 voltaje = np.loadtxt("EOG_señal1.txt")                            # Cargar los datos de voltaje de la señal
-fs = 800                                                          # Definir la frecuencia de muestreo 
+fs = 800                                                          # Frecuencia de muestreo de 4 veces la frecuencia de Nyquist
 N = len(voltaje)
 t = np.arange(N) / fs                                             # eje de tiempo
 
@@ -244,18 +251,170 @@ plt.show()
 <img width="1051" height="488" alt="image" src="https://github.com/user-attachments/assets/dd20318a-ab2c-4c5c-a7d1-a918d0fc1549" />
 
 ## **Caracterización de la señal**
-## **Código en Python (Google colab)**
+
+<pre> ```
+media = np.mean(voltaje)
+mediana = np.median(voltaje)
+desv_std = np.std(voltaje)
+vmax = np.max(voltaje)
+vmin = np.min(voltaje)
+ ```
+</pre>
+
+Media: -0.0912,
+Mediana: -0.0905,
+Desviación estándar: 0.7289,
+Máximo: 2.4918,
+Mínimo: -2.3107,
+
+## **Convolución, Correlación y Transformada de Fourier**
+
+<pre> ```
+# Convolución y correlación
+convolucion = np.convolve(voltaje, voltaje, mode="full")
+correlacion = np.correlate(voltaje, voltaje, mode="full")
+lags = np.arange(-N+1, N)
+
+# Transformada de Fourier
+fft_vals = np.fft.fft(voltaje)
+fft_freqs = np.fft.fftfreq(N, d=1/fs)
+fft_magnitude = np.abs(fft_vals)/N
+
+# Gráficas
+
+# 1. Convolución 
+kernel = np.ones(5) / 5   # ventana promedio
+conv_result = convolve(voltaje, kernel, mode='same')
+
+plt.figure(figsize=(10,4))
+plt.plot(t, conv_result, label="Convolución (ventana 5)")
+plt.xlabel("Tiempo [s]")
+plt.ylabel("Amplitud")
+plt.title("Convolución de la señal")
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# 2. Correlación
+corr_result = correlate(voltaje, voltaje, mode='full')
+lags = np.arange(-N+1, N)
+
+plt.figure(figsize=(10,4))
+plt.stem(lags, corr_result)
+plt.xlabel("Desplazamiento (lags)")
+plt.ylabel("Correlación")
+plt.title("Correlación de la señal")
+plt.grid(True)
+plt.show()
+plt.figure(figsize=(10,4))
+plt.plot(freqs_pos, mags_pos)
+plt.title("Transformada de Fourier (Espectro de magnitud)")
+plt.xlabel("Frecuencia [Hz]")
+plt.ylabel("Magnitud")
+plt.grid(True)
+plt.show()
+
+  
+  ```
+</pre>
+<img width="841" height="382" alt="image" src="https://github.com/user-attachments/assets/42fd4fe3-7f95-468c-ba81-79af45d42fa3" />
+
+<img width="867" height="379" alt="image" src="https://github.com/user-attachments/assets/30bfecfe-3362-4889-99e6-1058f07f743c" />
+
+<img width="852" height="383" alt="image" src="https://github.com/user-attachments/assets/4917d993-85b4-4873-b9cb-b7f6e4f8ebc2" />
+
+
+
+
+## **Clasificación de la señal**
 
 <pre> ```
 
+# Clasificación de la señal
+if np.allclose(np.std(voltaje), 0):
+    tipo = "Determinística constante"
+elif np.max(mags_pos) / np.mean(mags_pos) > 5:
+    tipo = "Predominantemente determinística, periódica"
+else:
+    tipo = "Aparentemente aleatoria / aperiódica"
 
-
-
+print("\n=== Clasificación de la señal ===")
+print(f"- {tipo}")
+print("- Digital (está discretizada en el tiempo por el muestreo)")
 
 
   
   ```
 </pre>
+- Predominantemente determinística, periódica
+- Digital (está discretizada en el tiempo por el muestreo)
+
+## **Densidad espectral**
+
+<pre> ```
+
+# Densidad espectral de potencia (PSD)
+freqs_psd, psd = periodogram(voltaje, fs)
+plt.figure(figsize=(10,4))
+plt.semilogy(freqs_psd, psd)
+plt.title("Densidad espectral de potencia (PSD)")
+plt.xlabel("Frecuencia [Hz]")
+plt.ylabel("PSD")
+plt.grid(True)
+plt.show()
+
+  
+  ```
+</pre>
+
+<img width="861" height="388" alt="image" src="https://github.com/user-attachments/assets/8539b3ff-647c-4201-bd16-bc54d0a3b1a7" />
+
+## **Datos estadisticos**
+
+<pre> ```
+
+
+mask = fft_freqs >= 0
+freqs_pos = fft_freqs[mask]
+mags_pos = fft_magnitude[mask]
+
+energia = mags_pos**2
+energia_total = np.sum(energia)
+
+# Frecuencia media (centroide espectral)
+freq_media = np.sum(freqs_pos * energia) / energia_total
+
+# Frecuencia mediana
+energia_acum = np.cumsum(energia)
+freq_mediana = freqs_pos[np.where(energia_acum >= energia_total/2)[0][0]]
+
+# Desviación estándar en frecuencia
+freq_std = np.sqrt(np.sum(((freqs_pos - freq_media)**2) * energia) / energia_total)
+
+print("\n=== Estadísticos en frecuencia ===")
+print(f"Frecuencia media: {freq_media:.2f} Hz")
+print(f"Frecuencia mediana: {freq_mediana:.2f} Hz")
+print(f"Desviación estándar: {freq_std:.2f} Hz")
+
+
+plt.figure(figsize=(8,4))
+plt.hist(freqs_pos, weights=energia, bins=40, color="c", edgecolor="k")
+plt.title("Histograma de energía por frecuencia")
+plt.xlabel("Frecuencia [Hz]")
+plt.ylabel("Energía acumulada")
+plt.grid(True)
+plt.show()
+
+  
+  ```
+</pre>
+
+Frecuencia media: 17.21 Hz,
+Frecuencia mediana: 10.00 Hz,
+Desviación estándar: 41.09 Hz
+<img width="697" height="386" alt="image" src="https://github.com/user-attachments/assets/bbbdbc0d-31b5-434d-80e7-252e0ebf614f" />
+
+
 
 ## **Análisis de los resultados de la parte C**
 La señal biológica generada mediante el generador de señales corresponde a un EOG, la cual fue muestreada con una frecuencia de fs = 800 Hz, lo que implica una frecuencia de Nyquist de 400 Hz, suficiente para garantizar un análisis espectral libre de aliasing; aunque la condición pedida en el laboratorio establecía muestrear a 4 veces la frecuencia de Nyquist (1600 Hz), en este caso los 800 Hz siguen siendo adecuados dado que la mayor parte de la energía de la señal se concentra por debajo de los 50 Hz. En el dominio del tiempo, la señal presentó una media de -0.0912 V, mediana de -0.0905 V, desviación estándar de 0.7289 V, valor máximo de 2.4918 V y mínimo de -2.3107 V, evidenciando oscilaciones alrededor de cero, propias de este tipo de registros biológicos. En el procesamiento temporal, la convolución con una ventana de 5 puntos permitió suavizar la señal y destacar su envolvente, mientras que la autocorrelación mostró simetría y picos periódicos, confirmando la naturaleza periódica de la señal. En el dominio de la frecuencia, la Transformada de Fourier y la Densidad Espectral de Potencia (PSD) indicaron que la mayor parte de la energía se concentra en bajas frecuencias, destacándose componentes principales por debajo de los 50 Hz, lo cual es característico de señales EOG. Los estadísticos espectrales obtenidos fueron: frecuencia media de 17.21 Hz, mediana de 10 Hz y desviación estándar de 41.09 Hz, valores que concuerdan con el histograma de energía, el cual mostró la mayor concentración energética en frecuencias bajas. De esta manera, la señal puede clasificarse como predominantemente determinística, periódica y digital, lo que concuerda tanto con su comportamiento temporal como espectral. En conclusión, la señal procesada cumple con las características de una señal biológica de baja frecuencia, siendo representativa de un registro EOG y validando correctamente los pasos del laboratorio en cuanto a adquisición, digitalización, caracterización estadística y análisis espectral.
